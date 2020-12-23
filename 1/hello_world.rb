@@ -1,0 +1,2 @@
+#классика:)
+puts 'Hello world'
