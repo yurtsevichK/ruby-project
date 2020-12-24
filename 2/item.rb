@@ -1,18 +1,23 @@
 # класс
 class Item
-  name = 'Dasha'
+  attr_accessor :price, :weight, :name
 
-  def price
-    #метод rand - это РАНДомное число
-    return rand 100
+  def initialize(options = {})
+    @price = options[:price]
+    @weight = options[:weight]
+    @name = options[:name]
+  end
+
+  # создали метод, инфо, в котором получаем информацию переданную в блоки
+  # если информация не получена, выводим "Нечего показывать"
+  def info
+    if block_given?
+      yield price, weight, name
+    else
+      puts 'Nothing to show'
+    end
   end
 end
-
-# объекты, которые содержат в себе данные класса Item
-item1 = Item.new
-item2 = Item.new
-p item1.price
-p item2.price
 
 
 
