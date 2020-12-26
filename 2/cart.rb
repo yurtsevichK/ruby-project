@@ -1,8 +1,7 @@
+require_relative 'item_container'
+
 class Cart
-
-  require_relative 'item_container'
   attr_reader :items
-
   include ItemContainer
 
   def initialize
