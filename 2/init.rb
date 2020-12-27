@@ -5,10 +5,12 @@ require_relative 'virtual_item'
 require_relative 'real_item'
 require_relative 'item_container'
 
-item1 = VirtualItem.new({ price: 2512.0, weight: 20, name: 'Gold' })
-item2 = RealItem.new({ price: 6780, weight: 300, name: 'Silver' })
-item3 = RealItem.new({ price: 150, weight: 1400, name: 'Platinum' })
+@items = []
+@items << VirtualItem.new({ price: 2512.0, weight: 20, name: 'gold' })
+@items << RealItem.new({ price: 6780, weight: 300, name: 'silver' })
+@items << RealItem.new({ price: 150, weight: 1400, name: 'platinum' })
 
+=begin
 cart = Cart.new
 cart.add_item item1
 cart.add_item item2
@@ -33,3 +35,4 @@ p item1.real_price.to_s + ' Real price'
 
 p order.count_valid_items
 
+=end
