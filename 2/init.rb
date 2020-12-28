@@ -4,11 +4,12 @@ require_relative 'order'
 require_relative 'virtual_item'
 require_relative 'real_item'
 require_relative 'item_container'
+require_relative 'string'
 
 @items = []
-@items << VirtualItem.new({ price: 2512.0, weight: 20, name: 'gold' })
-@items << RealItem.new({ price: 6780, weight: 300, name: 'silver' })
-@items << RealItem.new({ price: 150, weight: 1400, name: 'platinum' })
+@items << RealItem.new({ price: 240.0, weight: 290, name: 'gold' })
+@items << RealItem.new({ price: 270, weight: 300, name: 'silver' })
+@items << RealItem.new({ price: 250, weight: 310, name: 'platinum' })
 
 =begin
 cart = Cart.new

@@ -1,13 +1,14 @@
 # класс
 class Item
-  attr_reader :real_price, :name
-  attr_writer :price
+  attr_reader :real_price
+  attr_accessor :name, :price
 
   @@discount = 0.1
 
   def initialize(options = {})
     @real_price = options[:price]
     @name = options[:name]
+    @price = options[:price]
   end
 
   # создали метод, инфо, в котором получаем информацию переданную в блоки
@@ -29,7 +30,13 @@ class Item
   end
 
   def price
-    (@real_price - @real_price * self.class.discount) + tax
+    if real_price
+      (@real_price - @real_price * self.class.discount) + tax
+    end
+  end
+
+  def to_s
+    "#{self.name}:#{self.price}:#{self.weight}"
   end
 
   private
