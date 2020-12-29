@@ -1,8 +1,13 @@
 require_relative 'item_container'
+require_relative 'item_not_supported'
+require_relative 'antique_item'
+require_relative 'virtual_item'
 
 class Cart
   attr_reader :items
   include ItemContainer
+
+  UNSUPPORTED_ITEM = [AntiqueItem, VirtualItem]
 
   def initialize(owner)
     @items = []
@@ -11,9 +16,13 @@ class Cart
 
   def save_to_file
     File.open(@owner.to_s + '_cart.txt', 'w') do |f|
-      @items.each { |i| f.puts i }
+      #создали собственное исключение при помощи константы
+      @items.each do |i|
+        raise ItemNotSupported if UNSUPPORTED_ITEM.include? i.class
+          f.puts i
+        end
+      end
     end
-  end
 
   def read_from_file
     #ловим ошибку при помощи рескью

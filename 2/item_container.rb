@@ -1,8 +1,10 @@
 module ItemContainer
 
   module ClassMethods
+    MIN_PRICE = 50
+    #MIN_PRICE - константа, пишутся всегда с большой буквы
     def min_price
-      100
+      MIN_PRICE
     end
   end
 
@@ -27,6 +29,21 @@ module ItemContainer
 
     def count_valid_items
       @items.count { |i| i.price }
+    end
+
+    #создали метод, который будет выводить меседж, в случае, если метод не существует
+    def method_missing(method_name)
+      if method_name =~ /^all_/
+        show_all_tem_with_name(method_name.to_s.sub(/^all_/, '').chomp('s'))
+      else
+        super
+      end
+    end
+
+    private
+
+    def show_all_tem_with_name(name)
+       @items.map { |i| i if name == i.name }.compact
     end
   end
 

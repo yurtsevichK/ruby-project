@@ -7,5 +7,13 @@ cart = Cart.new(owner)
 ARGV.each do |arg|
   @items.each { |obj| cart.add_item obj if arg == obj.name }
 end
+
 cart.read_from_file
-cart.save_to_file
+
+#отлавливаем ошибку при сохранении файла и выводим меседж
+begin
+  cart.save_to_file
+rescue ItemNotSupported
+  puts "You have VirtualItem or AntiqueItem  in your cart
+              #{Cart::UNSUPPORTED_ITEM}"
+end

@@ -5,11 +5,27 @@ require_relative 'virtual_item'
 require_relative 'real_item'
 require_relative 'item_container'
 require_relative 'string'
+require_relative 'antique_item'
 
 @items = []
-@items << RealItem.new({ price: 240.0, weight: 290, name: 'gold' })
-@items << RealItem.new({ price: 270, weight: 300, name: 'silver' })
-@items << RealItem.new({ price: 250, weight: 310, name: 'platinum' })
+@items << VirtualItem.new({ price: 240.0, weight: 290, name: 'gold' })
+@items << AntiqueItem.new({ price: 222.0, weight: 220, name: 'ice' })
+@items << RealItem.new({ price: 432, weight: 243, name: 'car' })
+@items << RealItem.new({ price: 422, weight: 263, name: 'bike' })
+
+cart = Cart.new('amg')
+cart.add_item(RealItem.new({ price: 432, weight: 243, name: 'car' }))
+cart.add_item(RealItem.new({ price: 422, weight: 263, name: 'bike' }))
+
+p cart.kind_of? Cart
+p @items.first.kind_of? Item
+
+#проверяем цену первого товара ДВУМЯ СПОСОБАМИ(С УЧЕТОМ НАЛОГА И СКИДКИ)
+p @items.first.send :price
+p @items.first.price
+
+#метод SEND, позволяет получить доступ приватного метода обьекта, без него ошибка
+p @items.first.send :tax
 
 =begin
 cart = Cart.new
