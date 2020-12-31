@@ -1,22 +1,30 @@
-require_relative 'item'
-require_relative 'cart'
-require_relative 'order'
-require_relative 'virtual_item'
-require_relative 'real_item'
-require_relative 'item_container'
-require_relative 'string'
-require_relative 'antique_item'
+require_relative 'store_application'
+
+StoreApplication.set do |app|
+  app.name = 'Ruby App'
+  app.environment = :development
+
+  app.admin do |admin|
+    admin.email = 'admin@mail.com'
+    admin.login = 'admin'
+  end
+end
 
 @items = []
-@items << VirtualItem.new({ price: 240.0, weight: 290, name: 'gold' })
-@items << AntiqueItem.new({ price: 222.0, weight: 220, name: 'ice' })
-@items << RealItem.new({ price: 432, weight: 243, name: 'car' })
-@items << RealItem.new({ price: 422, weight: 263, name: 'bike' })
+@items << VirtualItem.new('gold', price: 240.0, weight: 290)
+@items << AntiqueItem.new('ice', price: 222.0, weight: 220)
+@items << RealItem.new('car', price: 432, weight: 243)
+@items << RealItem.new('bike', price: 422, weight: 263)
 
 cart = Cart.new('amg')
-cart.add_item(RealItem.new({ price: 432, weight: 243, name: 'car' }))
-cart.add_item(RealItem.new({ price: 422, weight: 263, name: 'bike' }))
+cart.add_item(RealItem.new('car', price: 432, weight: 243))
+cart.add_item(RealItem.new('bike', price: 422, weight: 263))
 
+p cart.send :all_cars
+p StoreApplication.name
+p StoreApplication.environment
+p StoreApplication.admin.login
+=begin
 p cart.kind_of? Cart
 p @items.first.kind_of? Item
 
@@ -26,6 +34,7 @@ p @items.first.price
 
 #метод SEND, позволяет получить доступ приватного метода обьекта, без него ошибка
 p @items.first.send :tax
+=end
 
 =begin
 cart = Cart.new

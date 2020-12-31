@@ -1,8 +1,9 @@
 class RealItem < Item
   attr_accessor :weight
 
-  def initialize(options)
+  def initialize(name, options)
     @weight = options[:weight]
+    @name = name
     super
   end
 
