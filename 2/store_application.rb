@@ -22,6 +22,8 @@ class StoreApplication
 
       #кладем в инстанс переменную класс
       @store ||= self
+      #замораживаю обьект имя
+      @store.freeze
     end
 
     def admin(&block)
@@ -39,6 +41,8 @@ class StoreApplication
           yield(self)
         end
         @store ||= self
+        #замораживаю обьекты емейл, пасс, login
+        @store.freeze
       end
     end
   end

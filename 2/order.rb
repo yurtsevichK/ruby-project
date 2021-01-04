@@ -2,6 +2,7 @@ require_relative 'item_container'
 
 class Order
   attr_reader :items
+  attr_accessor :place_at, :end_sending
   include ItemContainer
 
   def initialize
@@ -13,6 +14,7 @@ class Order
   # и разрешить доступ к аккаунт небезопасным приложениям
   # Создаем поток, делается при помощи 'Thread', отправляем емейл и спим
   def place
+    @place_at = Time.now
     thread = Thread.new do
       Pony.mail(
         to: StoreApplication::Admin.email,
@@ -37,5 +39,7 @@ class Order
       puts '.' + start.to_s
       sleep 0.5
     end
+    start_sending = Time.now
+    @end_sending = start_sending - @place_at
   end
 end

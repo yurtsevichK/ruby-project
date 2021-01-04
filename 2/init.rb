@@ -11,6 +11,15 @@ StoreApplication.set do |app|
   end
 end
 
+unless StoreApplication.frozen?
+  StoreApplication.name = 'New name'
+  StoreApplication::Admin.email='new@admin.com'
+  StoreApplication::Admin.pass='new password'
+end
+p StoreApplication.name
+p StoreApplication::Admin.email
+p StoreApplication::Admin.pass
+
 @items = []
 @items << VirtualItem.new('gold', price: 240.0, weight: 290)
 @items << AntiqueItem.new('ice', price: 222.0, weight: 220)
@@ -22,13 +31,19 @@ cart.add_item(RealItem.new('car', price: 432, weight: 243))
 cart.add_item(RealItem.new('bike', price: 422, weight: 263))
 
 p cart.send :all_cars
-p StoreApplication.name
-p StoreApplication.environment
-p StoreApplication.admin.login
+# p StoreApplication.name
+# p StoreApplication.environment
+# p StoreApplication.admin.login
 
 order = Order.new
-@items.each { |i| order.add_item i }
 order.place
+
+p order.place_at.strftime('%b %d')
+p order.end_sending
+
+#добавляем товары и отправляем емейл
+# @items.each { |i| order.add_item i }
+# order.place
 
 =begin
 p cart.kind_of? Cart
