@@ -1,4 +1,5 @@
 class StoreApplication
+
   #все методы, будут вызываться без создания экзмпляра класса
   class << self
 
@@ -16,6 +17,7 @@ class StoreApplication
         require_relative 'item_container'
         require_relative 'string'
         require_relative 'antique_item'
+        require 'pony'
       end
 
       #кладем в инстанс переменную класс
@@ -26,16 +28,17 @@ class StoreApplication
       @admin ||= Admin.new(&block)
     end
 
-    class Admin
-      class << self
-        attr_accessor :login, :email
+  end
 
-        def new
-          unless @store
-            yield(self)
-          end
-          @store ||= self
+  class Admin
+    class << self
+      attr_accessor :login, :email, :pass
+
+      def new
+        unless @store
+          yield(self)
         end
+        @store ||= self
       end
     end
   end

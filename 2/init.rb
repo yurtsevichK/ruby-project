@@ -5,7 +5,8 @@ StoreApplication.set do |app|
   app.environment = :development
 
   app.admin do |admin|
-    admin.email = 'admin@mail.com'
+    admin.email = 'ncyurtsevich@gmail.com'
+    admin.pass = 'jreozavod'
     admin.login = 'admin'
   end
 end
@@ -24,6 +25,11 @@ p cart.send :all_cars
 p StoreApplication.name
 p StoreApplication.environment
 p StoreApplication.admin.login
+
+order = Order.new
+@items.each { |i| order.add_item i }
+order.place
+
 =begin
 p cart.kind_of? Cart
 p @items.first.kind_of? Item

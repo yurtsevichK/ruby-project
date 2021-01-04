@@ -11,5 +11,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" scope="PROVIDED" name="mail (v2.7.1, ruby-2.7.0-p0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="mini_mime (v1.0.2, ruby-2.7.0-p0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="pony (v1.13.1, ruby-2.7.0-p0) [gem]" level="application" />
   </component>
 </module>
