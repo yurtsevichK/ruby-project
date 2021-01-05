@@ -1,13 +1,12 @@
 # класс
 class Item
   attr_reader :real_price
-  attr_accessor :name, :price
+  attr_accessor :name
 
-  @@discount = 0.1
+  @@discount = 0.01
 
   def initialize(name, options = {})
     @real_price = options[:price]
-    @price = options[:price]
     @name = name
   end
 
@@ -22,8 +21,8 @@ class Item
   end
 
   def self.discount
-    if Time.now.month == 12
-      @@discount + 0.3
+    if Time.now.month == 1
+      @@discount + 0.03
     else
       @@discount
     end
@@ -36,7 +35,11 @@ class Item
   end
 
   def to_s
-    "#{self.name}:#{self.price}:#{self.weight}"
+    "#{self.name}:#{self.price}"
+  end
+
+  def price=(value)
+    @real_price = value
   end
 
   private
